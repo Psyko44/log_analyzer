@@ -272,11 +272,41 @@ def analyze_pcap(filepath):
         "ssl_attacks": []
     }
 
-    packets = rdpcap(filepath)
+    try:
+        packets = rdpcap(filepath)
+        
+        for packet in packets:
+            # Example of analyzing packets (you can implement your own analysis)
+            if packet.haslayer(TCP):
+                vulnerabilities["tcp_injections"].append("Potential TCP injection detected")
+            
+            if packet.haslayer(UDP):
+                vulnerabilities["suspicious_traffic"].append("Suspicious UDP traffic detected")
 
-    for packet in packets:
-        # You can implement your packet analysis here
-        pass
+            if packet.haslayer(ICMP):
+                vulnerabilities["dos_attacks"].append("Potential ICMP flood detected")
+            
+            if packet.haslayer(DNS):
+                vulnerabilities["dns_spoofing"].append("Potential DNS spoofing detected")
+
+            if packet.haslayer(ARP):
+                vulnerabilities["arp_poisoning"].append("Potential ARP poisoning detected")
+
+            if packet.haslayer(SSL):
+                vulnerabilities["ssl_attacks"].append("Potential SSL/TLS attack detected")
+
+            # Example of searching for open ports
+            if packet.haslayer(IP) and packet.haslayer(TCP):
+                ip_src = packet[IP].src
+                ip_dst = packet[IP].dst
+                src_port = packet[TCP].sport
+                dst_port = packet[TCP].dport
+
+                if dst_port == 80:
+                    vulnerabilities["open_ports"].append(f"HTTP port 80 open at {ip_dst}")
+
+    except Exception as e:
+        vulnerabilities["error"] = str(e)
 
     return vulnerabilities
 
