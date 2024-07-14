@@ -1,0 +1,29 @@
+{
+    "errors": [],
+    "warnings": [],
+    "unauthorized_access": [],
+    "possible_sql_injections": [
+        "Potential SQL Injection detected",
+        "Potential SQL Injection detected",
+        "Potential SQL Injection detected",
+        "Potential SQL Injection detected"
+    ],
+    "server_errors": [],
+    "access_denied": [],
+    "brute_force_attempts": [],
+    "buffer_overflows": [],
+    "command_injections": [],
+    "session_hijacking": [],
+    "xss_attempts": [],
+    "path_traversal": [],
+    "csrf_attempts": [],
+    "dos_attempts": [],
+    "json_vulnerabilities": [],
+    "sensitive_data_exposure": [],
+    "remote_code_execution": [],
+    "crypto_vulnerabilities": [],
+    "authorization_flaws": [
+        "Potential Authorization Flaw detected"
+    ],
+    "business_logic_errors": []
+}
